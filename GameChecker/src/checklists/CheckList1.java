@@ -159,7 +159,6 @@ public class CheckList1  {
 				HomeScreen newHome = new HomeScreen();
 				newHome.setVisible(true);
 				frame.setVisible(false);
-				//
 			}
 		});
 		frame.getContentPane().add(btnNewButton);
