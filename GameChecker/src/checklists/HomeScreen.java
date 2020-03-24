@@ -1,21 +1,29 @@
 package checklists;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics;
 
 public class HomeScreen extends JFrame {
-
-	private JPanel contentPane;
-
+	
+	private MyPanel contentPane;
+	private BufferedImage img;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -36,9 +44,19 @@ public class HomeScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public HomeScreen() {
+		// add background image
+		try {
+            img = ImageIO.read(new File("C:\\Users\\Sung Min\\Desktop\\GameChecker\\Game_Checklist\\GameChecker\\src\\images\\home-image.jpg"));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+		
+		// add a panel
+		contentPane= new MyPanel();
+        add(contentPane);
+        
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 493, 200);
-		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -63,10 +81,20 @@ public class HomeScreen extends JFrame {
 		btnLevel.setBounds(313, 93, 113, 23);
 		contentPane.add(btnLevel);
 		
-		JLabel lblNewLabel = new JLabel("Choose Level...");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(47, 38, 109, 14);
+		JLabel lblNewLabel = new JLabel("Choose Level...", SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel.setBounds(160, 38, 169, 14);
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBackground(new Color(0,0,0,100));
+		lblNewLabel.setOpaque(true);
 		contentPane.add(lblNewLabel);
 	}
+	
+	private class MyPanel extends JPanel{
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
 
 }

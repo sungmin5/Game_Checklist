@@ -1,5 +1,6 @@
 package checklists;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -7,8 +8,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
@@ -145,10 +148,29 @@ public class CheckList1  {
 		ckboxes[6].setBounds(257, 211, 153, 23);
 		frame.getContentPane().add(ckboxes[6]);
 		
+		// New font with strike
+		Font font = new Font("helvetica", Font.PLAIN, 12);
+		Map  attributes = font.getAttributes();
+		attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+		Font font_strike = new Font(attributes);
+		
 		ckboxes[7] = new JCheckBox("Enter the scorpion dungeon \r\nand 50 shells");
 		ckboxes[7].setHorizontalAlignment(SwingConstants.LEFT);
 		ckboxes[7].setVerticalAlignment(SwingConstants.TOP);
 		ckboxes[7].setBounds(257, 260, 153, 77);
+		ckboxes[7].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Create new Home page and open
+				if(ckboxes[7].isSelected()==true) {
+					ckboxes[7].setFont(font_strike);
+					ckboxes[7].setForeground(Color.RED);
+				}
+				else {
+					ckboxes[7].setFont(new Font("helvetica", Font.PLAIN, 12));
+					ckboxes[7].setForeground(Color.BLACK);
+				}
+			}
+		});
 		frame.getContentPane().add(ckboxes[7]);
 		
 		JButton btnNewButton = new JButton("Go Back Home");
